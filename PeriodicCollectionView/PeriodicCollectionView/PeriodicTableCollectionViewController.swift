@@ -39,14 +39,15 @@ class PeriodicTableCollectionViewController: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return 1
+        return data.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! ElementCollectionViewCell
     
-        cell.elementView.elementSymbolLabel.text = data[0].0
-        cell.elementView.elementNumberLabel.text = String(data[0].1)
+        let element = data[indexPath.row]
+        cell.elementView.elementSymbolLabel.text = element.0
+        cell.elementView.elementNumberLabel.text = String(element.1)
     
         return cell
     }

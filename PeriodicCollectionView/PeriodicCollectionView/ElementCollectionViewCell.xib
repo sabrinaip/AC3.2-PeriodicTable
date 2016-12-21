@@ -3,17 +3,16 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="gTV-IL-0wX" customClass="ElementCollectionViewCell" customModule="PeriodicCollectionView" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="189" height="166"/>
+            <rect key="frame" x="0.0" y="0.0" width="253" height="250"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="189" height="166"/>
+                <rect key="frame" x="0.0" y="0.0" width="253" height="250"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7lQ-oJ-98c" customClass="ElementView" customModule="PeriodicCollectionView" customModuleProvider="target">
@@ -23,16 +22,16 @@
             </view>
             <color key="backgroundColor" red="0.2784313725" green="0.45882352939999999" blue="0.66274509800000003" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
-                <constraint firstItem="7lQ-oJ-98c" firstAttribute="trailing" secondItem="gTV-IL-0wX" secondAttribute="trailingMargin" id="7xi-Q0-W5P"/>
-                <constraint firstItem="7lQ-oJ-98c" firstAttribute="bottom" secondItem="gTV-IL-0wX" secondAttribute="bottomMargin" id="X6g-rA-liq"/>
-                <constraint firstItem="7lQ-oJ-98c" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="topMargin" id="cpV-Xg-3zZ"/>
-                <constraint firstItem="7lQ-oJ-98c" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leadingMargin" id="mOa-27-WuT"/>
+                <constraint firstAttribute="bottom" secondItem="7lQ-oJ-98c" secondAttribute="bottom" constant="1" id="3KB-1n-evd"/>
+                <constraint firstItem="7lQ-oJ-98c" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="1" id="Qu6-id-dKq"/>
+                <constraint firstItem="7lQ-oJ-98c" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="1" id="Z0U-Xu-NbF"/>
+                <constraint firstAttribute="trailing" secondItem="7lQ-oJ-98c" secondAttribute="trailing" constant="1" id="qCH-AK-elM"/>
             </constraints>
-            <size key="customSize" width="189" height="166"/>
+            <size key="customSize" width="253" height="250"/>
             <connections>
                 <outlet property="elementView" destination="7lQ-oJ-98c" id="vNH-b3-mHT"/>
             </connections>
-            <point key="canvasLocation" x="103.5" y="112"/>
+            <point key="canvasLocation" x="135.5" y="154"/>
         </collectionViewCell>
     </objects>
 </document>
