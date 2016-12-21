@@ -15,15 +15,11 @@ class PeriodicTableCollectionViewController: UICollectionViewController, NSFetch
 
     var fetchedResultsController: NSFetchedResultsController<Element>!
     
-    let data = [("H", 1), ("He", 2), ("Li", 3)]
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.collectionView!.register(UINib(nibName:"ElementCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: reuseIdentifier)
-        
         getData()
         initializeFetchedResultsController()
-
     }
     
     func getData() {
@@ -177,6 +173,49 @@ class PeriodicTableCollectionViewController: UICollectionViewController, NSFetch
 
     override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
     
+    }
+    */
+    
+    
+    
+    /*
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.beginUpdates()
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
+        switch type {
+        case .insert:
+            tableView.insertSections(IndexSet(integer: sectionIndex), with: .fade)
+        case .delete:
+            tableView.deleteSections(IndexSet(integer: sectionIndex), with: .fade)
+        case .move:
+            break
+        case .update:
+            break
+        }
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        switch type {
+        case .insert:
+            tableView.insertRows(at: [newIndexPath!], with: .fade)
+        case .delete:
+            if let ip = indexPath {
+                tableView.deleteRows(at: [ip], with: .fade)
+            }
+        case .update:
+            if let ip = indexPath,
+                let cell = tableView.cellForRow(at: ip) {
+                configureCell(cell, indexPath: ip)
+            }
+        case .move:
+            tableView.moveRow(at: indexPath!, to: newIndexPath!)
+        }
+    }
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.endUpdates()
     }
     */
 
