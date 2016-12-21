@@ -16,6 +16,10 @@
 		4B52B1631E0ADB1700AC05FD /* ElementCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B52B1611E0ADB1700AC05FD /* ElementCollectionViewCell.xib */; };
 		4B52B16C1E0ADDD700AC05FD /* ElementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B52B16A1E0ADDD700AC05FD /* ElementView.swift */; };
 		4B52B16D1E0ADDD700AC05FD /* ElementView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B52B16B1E0ADDD700AC05FD /* ElementView.xib */; };
+		4B9E607D1E0AF4D000AAA91C /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4B9E607B1E0AF4D000AAA91C /* Model.xcdatamodeld */; };
+		4B9E60801E0AF65800AAA91C /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9E607F1E0AF65800AAA91C /* DataController.swift */; };
+		4B9E60821E0AF74500AAA91C /* Element+JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9E60811E0AF74500AAA91C /* Element+JSON.swift */; };
+		4B9E60841E0AF7C900AAA91C /* APIRequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9E60831E0AF7C900AAA91C /* APIRequestManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +34,10 @@
 		4B52B1611E0ADB1700AC05FD /* ElementCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ElementCollectionViewCell.xib; sourceTree = "<group>"; };
 		4B52B16A1E0ADDD700AC05FD /* ElementView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ElementView.swift; sourceTree = "<group>"; };
 		4B52B16B1E0ADDD700AC05FD /* ElementView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ElementView.xib; sourceTree = "<group>"; };
+		4B9E607C1E0AF4D000AAA91C /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		4B9E607F1E0AF65800AAA91C /* DataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
+		4B9E60811E0AF74500AAA91C /* Element+JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Element+JSON.swift"; sourceTree = "<group>"; };
+		4B9E60831E0AF7C900AAA91C /* APIRequestManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIRequestManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +70,10 @@
 		4B52B14B1E0AD94400AC05FD /* PeriodicCollectionView */ = {
 			isa = PBXGroup;
 			children = (
+				4B9E607B1E0AF4D000AAA91C /* Model.xcdatamodeld */,
+				4B9E607F1E0AF65800AAA91C /* DataController.swift */,
+				4B9E60811E0AF74500AAA91C /* Element+JSON.swift */,
+				4B9E60831E0AF7C900AAA91C /* APIRequestManager.swift */,
 				4B52B16E1E0AE1C200AC05FD /* Views */,
 				4B52B1701E0AE20C00AC05FD /* View Cells */,
 				4B52B1711E0AE21700AC05FD /* View Controllers */,
@@ -182,8 +194,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4B9E60841E0AF7C900AAA91C /* APIRequestManager.swift in Sources */,
 				4B52B14D1E0AD94400AC05FD /* AppDelegate.swift in Sources */,
+				4B9E60801E0AF65800AAA91C /* DataController.swift in Sources */,
 				4B52B15F1E0ADA7C00AC05FD /* PeriodicTableCollectionViewController.swift in Sources */,
+				4B9E60821E0AF74500AAA91C /* Element+JSON.swift in Sources */,
+				4B9E607D1E0AF4D000AAA91C /* Model.xcdatamodeld in Sources */,
 				4B52B1621E0ADB1700AC05FD /* ElementCollectionViewCell.swift in Sources */,
 				4B52B16C1E0ADDD700AC05FD /* ElementView.swift in Sources */,
 			);
@@ -347,8 +363,22 @@
 				4B52B15D1E0AD94400AC05FD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		4B9E607B1E0AF4D000AAA91C /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				4B9E607C1E0AF4D000AAA91C /* Model.xcdatamodel */,
+			);
+			currentVersion = 4B9E607C1E0AF4D000AAA91C /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 4B52B1411E0AD94300AC05FD /* Project object */;
 }

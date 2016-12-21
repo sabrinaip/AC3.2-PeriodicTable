@@ -7,16 +7,103 @@
 //
 
 import UIKit
+import CoreData
 
 private let reuseIdentifier = "Cell"
 
-class PeriodicTableCollectionViewController: UICollectionViewController {
+class PeriodicTableCollectionViewController: UICollectionViewController, NSFetchedResultsControllerDelegate {
 
+    var fetchedResultsController: NSFetchedResultsController<Element>!
+    
     let data = [("H", 1), ("He", 2), ("Li", 3)]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.collectionView!.register(UINib(nibName:"ElementCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: reuseIdentifier)
+        
+        getData()
+        initializeFetchedResultsController()
+
+    }
+    
+    func getData() {
+        APIRequestManager.manager.getData(endPoint: "https://api.fieldbook.com/v1/5859ad86d53164030048bae2/elements")  { (data: Data?) in
+            if let validData = data {
+                if let jsonData = try? JSONSerialization.jsonObject(with: validData, options:[]) {
+                    if let elements = jsonData as? [[String:Any]] {//,
+                        //let records = wholeDict["results"] as? [[String:Any]] {
+                        
+                        // used to be our way of adding a record
+                        // self.allArticles.append(contentsOf:Article.parseArticles(from: records))
+                        
+                        // create the private context on the thread that needs it
+                        let moc = (UIApplication.shared.delegate as! AppDelegate).dataController.privateContext
+                        
+                        moc.performAndWait {
+                            for ele in elements {
+                                // now it goes in the database
+                                let element = NSEntityDescription.insertNewObject(forEntityName: "Element", into: moc) as! Element
+                                element.populate(from: ele)
+                            }
+                            
+                            do {
+                                try moc.save()
+                                
+                                moc.parent?.performAndWait {
+                                    do {
+                                        try moc.parent?.save()
+                                    }
+                                    catch {
+                                        fatalError("Failure to save context: \(error)")
+                                    }
+                                }
+                            }
+                            catch {
+                                fatalError("Failure to save context: \(error)")
+                            }
+                        }
+                        // start off with everything
+                        //self.articles = self.allArticles
+                        DispatchQueue.main.async {
+                            self.collectionView?.reloadData()
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    func initializeFetchedResultsController() {
+        let moc = (UIApplication.shared.delegate as! AppDelegate).dataController.managedObjectContext
+        
+        let request = NSFetchRequest<Element>(entityName: "Element")
+        let numberSort = NSSortDescriptor(key: "number", ascending: true)
+        let groupSort = NSSortDescriptor(key: "group", ascending: true)
+        request.sortDescriptors = [groupSort, numberSort]
+        
+        do {
+            let els = try moc.fetch(request)
+            
+            for el in els {
+                print("\(el.group) \(el.number) \(el.symbol)")
+            }
+        }
+        catch {
+            print("error fetching")
+        }
+        
+//        let predicate = NSPredicate(format: "title < %@", "M")
+//        request.predicate = predicate
+        
+        fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: moc, sectionNameKeyPath: "group", cacheName: nil)
+        fetchedResultsController.delegate = self
+        
+        do {
+            try fetchedResultsController.performFetch()
+        }
+        catch {
+            fatalError("Failed to initialize FetchedResultsController: \(error)")
+        }
     }
 
     /*
@@ -32,24 +119,34 @@ class PeriodicTableCollectionViewController: UICollectionViewController {
     // MARK: UICollectionViewDataSource
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
+        guard let sections = fetchedResultsController.sections else {
+            print("No sections in fetchedResultsController")
+            return 0
+        }
+        return sections.count
     }
 
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
-        return data.count
+        guard let sections = fetchedResultsController.sections else {
+            fatalError("No sections in fetchedResultsController")
+        }
+        let sectionInfo = sections[section]
+        return sectionInfo.numberOfObjects
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! ElementCollectionViewCell
     
-        let element = data[indexPath.row]
-        cell.elementView.elementSymbolLabel.text = element.0
-        cell.elementView.elementNumberLabel.text = String(element.1)
+        configureCell(cell, indexPath: indexPath)
     
         return cell
+    }
+    
+    func configureCell(_ cell: ElementCollectionViewCell, indexPath: IndexPath) {
+        let element = fetchedResultsController.object(at: indexPath)
+        cell.elementView.elementSymbolLabel.text = element.symbol
+        cell.elementView.elementNumberLabel.text = String(element.number)
     }
 
     // MARK: UICollectionViewDelegate
